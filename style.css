@@ -5,11 +5,29 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Segoe UI', sans-serif;
     background: #0a0a0a;
     color: #ffffff;
     line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ===== BARRE DE PROGRESSION ===== */
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #00ffcc, #00ccaa);
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.1s;
+    box-shadow: 0 0 10px #00ffcc;
 }
 
 /* ===== HEADER ===== */
@@ -21,6 +39,7 @@ header {
     padding: 15px 50px;
     z-index: 1000;
     border-bottom: 1px solid #00ffcc33;
+    backdrop-filter: blur(10px);
 }
 
 nav {
@@ -30,25 +49,72 @@ nav {
 }
 
 .logo {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: bold;
     color: #00ffcc;
+    text-shadow: 0 0 10px #00ffcc88;
 }
 
 nav ul {
     display: flex;
     list-style: none;
-    gap: 30px;
+    gap: 25px;
 }
 
 nav ul a {
     color: #ffffff;
     text-decoration: none;
-    transition: color 0.3s;
+    transition: all 0.3s;
+    font-size: 15px;
+    position: relative;
+}
+
+nav ul a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #00ffcc;
+    transition: width 0.3s;
 }
 
 nav ul a:hover {
     color: #00ffcc;
+}
+
+nav ul a:hover::after {
+    width: 100%;
+}
+
+.burger {
+    display: none;
+    font-size: 24px;
+    color: #00ffcc;
+    cursor: pointer;
+}
+
+/* ===== PHOTO DE PROFIL ===== */
+.photo-profil {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 4px solid #00ffcc;
+    object-fit: cover;
+    margin-bottom: 25px;
+    box-shadow: 0 0 30px #00ffcc88;
+    animation: glow 2s ease-in-out infinite alternate;
+    transition: transform 0.3s;
+}
+
+.photo-profil:hover {
+    transform: scale(1.05);
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 20px #00ffcc88; }
+    to { box-shadow: 0 0 40px #00ffcc, 0 0 60px #00ffcc55; }
 }
 
 /* ===== HERO ===== */
@@ -58,20 +124,50 @@ nav ul a:hover {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 100px 20px;
+    padding: 120px 20px 60px;
     background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 50%, #00ffcc11 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, #00ffcc11 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
 .hero h1 {
     font-size: 60px;
     color: #00ffcc;
     margin-bottom: 15px;
+    text-shadow: 0 0 20px #00ffcc88;
 }
 
 .hero h2 {
     font-size: 24px;
     color: #cccccc;
     margin-bottom: 20px;
+    min-height: 30px;
+}
+
+.typing {
+    color: #00ffcc;
+    font-weight: bold;
 }
 
 .hero p {
@@ -86,6 +182,7 @@ nav ul a:hover {
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
+    margin-bottom: 30px;
 }
 
 .btn {
@@ -95,17 +192,54 @@ nav ul a:hover {
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
-    transition: transform 0.3s;
+    transition: all 0.3s;
+    box-shadow: 0 0 15px #00ffcc44;
+    display: inline-block;
 }
 
 .btn:hover {
-    transform: scale(1.05);
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px #00ffcc88;
 }
 
 .btn-outline {
     background: transparent;
     color: #00ffcc;
     border: 2px solid #00ffcc;
+}
+
+.btn-outline:hover {
+    background: #00ffcc;
+    color: #000;
+}
+
+/* ===== RÉSEAUX SOCIAUX ===== */
+.social-links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: #1a1a1a;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 22px;
+    transition: all 0.3s;
+    border: 2px solid #00ffcc44;
+}
+
+.social-links a:hover {
+    background: #00ffcc;
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 0 25px #00ffcc;
+    border-color: #00ffcc;
 }
 
 /* ===== SECTIONS ===== */
@@ -118,8 +252,24 @@ nav ul a:hover {
 .section-title {
     font-size: 36px;
     color: #00ffcc;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
     text-align: center;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: #00ffcc;
+    border-radius: 2px;
+    box-shadow: 0 0 10px #00ffcc;
 }
 
 /* ===== À PROPOS ===== */
@@ -136,6 +286,63 @@ nav ul a:hover {
     color: #00ffcc;
 }
 
+/* ===== TIMELINE ===== */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-left: 30px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #00ffcc44;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+    padding-left: 30px;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -25px;
+    top: 5px;
+    width: 15px;
+    height: 15px;
+    background: #00ffcc;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #00ffcc;
+}
+
+.timeline-content {
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 3px solid #00ffcc;
+    transition: transform 0.3s;
+}
+
+.timeline-content:hover {
+    transform: translateX(10px);
+}
+
+.timeline-content h3 {
+    color: #00ffcc;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.timeline-content p {
+    color: #cccccc;
+}
+
 /* ===== COMPÉTENCES ===== */
 .competences-grid {
     display: grid;
@@ -148,6 +355,12 @@ nav ul a:hover {
     padding: 30px;
     border-radius: 10px;
     border-left: 4px solid #00ffcc;
+    transition: all 0.3s;
+}
+
+.competence-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px #00ffcc22;
 }
 
 .competence-card h3 {
@@ -173,23 +386,68 @@ nav ul a:hover {
     color: #00ffcc;
 }
 
+/* ===== SERVICES ===== */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.service-card {
+    background: #1a1a1a;
+    padding: 40px 30px;
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.3s;
+    border: 1px solid #00ffcc22;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    border-color: #00ffcc;
+    box-shadow: 0 15px 40px #00ffcc33;
+}
+
+.service-icon {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.service-card h3 {
+    color: #00ffcc;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.service-card p {
+    color: #cccccc;
+}
+
 /* ===== PROJETS ===== */
 .projets-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
 }
 
 .projet-card {
     background: #1a1a1a;
-    padding: 30px;
-    border-radius: 10px;
+    padding: 35px 30px;
+    border-radius: 15px;
     text-align: center;
-    transition: transform 0.3s;
+    transition: all 0.3s;
+    border: 1px solid #00ffcc22;
 }
 
 .projet-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
+    border-color: #00ffcc;
+    box-shadow: 0 15px 40px #00ffcc33;
+}
+
+.projet-icon {
+    font-size: 50px;
+    margin-bottom: 20px;
 }
 
 .projet-card h3 {
@@ -201,17 +459,24 @@ nav ul a:hover {
 .projet-card p {
     color: #cccccc;
     margin-bottom: 20px;
+    font-size: 15px;
 }
 
 .btn-small {
     display: inline-block;
     background: #00ffcc;
     color: #000;
-    padding: 8px 20px;
+    padding: 10px 22px;
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
     font-size: 14px;
+    transition: all 0.3s;
+}
+
+.btn-small:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px #00ffcc88;
 }
 
 /* ===== CONTACT ===== */
@@ -221,51 +486,87 @@ nav ul a:hover {
 }
 
 .contact-content p {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .contact-content a {
     color: #00ffcc;
     text-decoration: none;
+    transition: all 0.3s;
 }
 
 .contact-content a:hover {
-    text-decoration: underline;
+    text-shadow: 0 0 15px #00ffcc;
+}
+
+.contact-content .btn {
+    display: inline-block;
+    margin-top: 20px;
 }
 
 /* ===== FOOTER ===== */
 footer {
     text-align: center;
-    padding: 30px;
+    padding: 40px 20px;
     background: #000;
     color: #555;
     border-top: 1px solid #00ffcc33;
 }
 
+.footer-sub {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #00ffcc88;
+}
+
+/* ===== BOUTON RETOUR EN HAUT ===== */
+#backToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: #00ffcc;
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: none;
+    z-index: 999;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px #00ffcc88;
+}
+
+#backToTop:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px #00ffcc;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-    header {
-        padding: 15px 20px;
-    }
+    header { padding: 15px 20px; }
     
     nav ul {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background: rgba(10, 10, 10, 0.98);
+        padding: 20px;
         gap: 15px;
-        font-size: 14px;
+        border-bottom: 1px solid #00ffcc33;
     }
     
-    .hero h1 {
-        font-size: 40px;
-    }
+    nav ul.active { display: flex; }
+    .burger { display: block; }
     
-    .hero h2 {
-        font-size: 18px;
-    }
+    .hero h1 { font-size: 40px; }
+    .hero h2 { font-size: 18px; }
+    .photo-profil { width: 140px; height: 140px; }
     
-    .section {
-        padding: 60px 20px;
-    }
-    
-    .section-title {
-        font-size: 28px;
-    }
+    .section { padding: 60px 20px; }
+    .section-title { font-size: 28px; }
 }

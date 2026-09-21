@@ -3,34 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laurent Bajika - Portfolio</title>
+    <title>Laurent Bajika - Développeur Python & Réseaux</title>
+    <meta name="description" content="Portfolio de Laurent Bajika - Développeur Python et futur technicien réseaux">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- ===== BARRE DE PROGRESSION ===== -->
+    <div class="progress-bar" id="progressBar"></div>
 
     <!-- ===== HEADER ===== -->
     <header>
         <nav>
             <div class="logo">LB</div>
-            <ul>
+            <ul id="menu">
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#apropos">À propos</a></li>
+                <li><a href="#parcours">Parcours</a></li>
                 <li><a href="#competences">Compétences</a></li>
+                <li><a href="#services">Services</a></li>
                 <li><a href="#projets">Projets</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <div class="burger" onclick="toggleMenu()">☰</div>
         </nav>
     </header>
 
     <!-- ===== ACCUEIL ===== -->
     <section id="accueil" class="hero">
         <div class="hero-content">
+            <img src="Photo.jpg" alt="Laurent Bajika" class="photo-profil">
             <h1>Laurent Bajika</h1>
-            <h2>Développeur Python & Futur Technicien Réseaux</h2>
-            <p>Passionné par la création d'applications et l'apprentissage des réseaux informatiques.</p>
+            <h2><span class="typing"></span></h2>
+            <p>Passionné par le développement d'applications et la configuration des réseaux informatiques.</p>
             <div class="hero-buttons">
                 <a href="#projets" class="btn">Voir mes projets</a>
                 <a href="#contact" class="btn btn-outline">Me contacter</a>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/Laurent-Dev571" target="_blank" title="GitHub">💻</a>
+                <a href="https://wa.me/243976412751" target="_blank" title="WhatsApp">💬</a>
+                <a href="https://www.instagram.com/kabembalaurent72" target="_blank" title="Instagram">📸</a>
+                <a href="mailto:laurentbajika67@gmail.com" title="Email">📧</a>
             </div>
         </div>
     </section>
@@ -41,7 +56,35 @@
         <div class="apropos-content">
             <p>Je m'appelle <strong>Laurent Bajika</strong>, développeur débutant en <strong>Python</strong> et passionné par les <strong>réseaux informatiques</strong>.</p>
             <p>Je crée des applications de bureau avec Tkinter et je me forme actuellement au <strong>CCNA</strong> pour devenir technicien réseaux.</p>
-            <p>Mon objectif : <strong>associer le développement et les réseaux</strong> pour créer des solutions innovantes.</p>
+            <p>Mon objectif : <strong>maîtriser deux domaines complémentaires</strong> — le développement d'applications et la configuration des réseaux — et réaliser des projets dans chacun d'eux.</p>
+        </div>
+    </section>
+
+    <!-- ===== PARCOURS ===== -->
+    <section id="parcours" class="section">
+        <h2 class="section-title">Mon Parcours</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>2026 - Aujourd'hui</h3>
+                    <p>Développement de mes premières applications Python : <strong>Laurent Manager</strong> et <strong>Laurent Tools</strong>.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>2026 - En cours</h3>
+                    <p>Formation <strong>CCNA</strong> pour devenir technicien réseaux certifié.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Futur</h3>
+                    <p>Objectif : <strong>exceller dans les deux domaines</strong> — créer des applications utiles et configurer des réseaux fiables.</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -70,19 +113,43 @@
         </div>
     </section>
 
+    <!-- ===== SERVICES ===== -->
+    <section id="services" class="section">
+        <h2 class="section-title">Mes Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🐍</div>
+                <h3>Développement Python</h3>
+                <p>Création d'applications de bureau, scripts et outils automatisés.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🌐</div>
+                <h3>Configuration Réseau</h3>
+                <p>Installation et configuration de réseaux (routeurs, switchs, câblage).</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3>Maintenance</h3>
+                <p>Dépannage informatique et maintenance de systèmes.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- ===== PROJETS ===== -->
     <section id="projets" class="section">
         <h2 class="section-title">Mes Projets</h2>
         <div class="projets-grid">
             <div class="projet-card">
-                <h3>📁 Laurent Manager</h3>
-                <p>Gestionnaire de fichiers avec interface moderne.</p>
-                <a href="https://github.com/Laurent-Dev571/Laurent-Manager" target="_blank" class="btn-small">Voir sur GitHub</a>
+                <div class="projet-icon">📁</div>
+                <h3>Laurent Manager</h3>
+                <p>Gestionnaire de fichiers complet avec interface moderne, recherche, tri, copier/coller, renommer, supprimer.</p>
+                <a href="https://github.com/Laurent-Dev571/Laurent-Manager" target="_blank" class="btn-small">Voir sur GitHub →</a>
             </div>
             <div class="projet-card">
-                <h3>🛠️ Laurent Tools</h3>
-                <p>Boîte à outils avec 6 outils en 1.</p>
-                <a href="https://github.com/Laurent-Dev571/Laurent-Tools" target="_blank" class="btn-small">Voir sur GitHub</a>
+                <div class="projet-icon">🛠️</div>
+                <h3>Laurent Tools</h3>
+                <p>Boîte à outils avec 5 outils : générateur de mots de passe, calculatrice, bloc-notes, ZIP, convertisseur d'images.</p>
+                <a href="https://github.com/Laurent-Dev571/Laurent-Tools" target="_blank" class="btn-small">Voir sur GitHub →</a>
             </div>
         </div>
     </section>
@@ -93,13 +160,20 @@
         <div class="contact-content">
             <p>📧 Email : <a href="mailto:laurentbajika67@gmail.com">laurentbajika67@gmail.com</a></p>
             <p>💻 GitHub : <a href="https://github.com/Laurent-Dev571" target="_blank">@Laurent-Dev571</a></p>
+            <p>💬 WhatsApp : <a href="https://wa.me/243976412751" target="_blank">+243 976 412 751</a></p>
+            <p>📸 Instagram : <a href="https://www.instagram.com/kabembalaurent72" target="_blank">@kabembalaurent72</a></p>
+            <a href="https://wa.me/243976412751" target="_blank" class="btn">Me contacter sur WhatsApp</a>
         </div>
     </section>
 
     <!-- ===== FOOTER ===== -->
     <footer>
         <p>© 2026 Laurent Bajika - Tous droits réservés</p>
+        <p class="footer-sub">Fait avec 💚 et Python</p>
     </footer>
+
+    <!-- ===== BOUTON RETOUR EN HAUT ===== -->
+    <button id="backToTop" onclick="scrollToTop()">⬆️</button>
 
     <script src="script.js"></script>
 </body>
